@@ -285,6 +285,20 @@ def test_update_valuations_delisted(
         asset.update_valuations(through_today=True)
 
 
+def test_update_valuations_non_overlapping_preserves_existing(
+    asset: Asset,
+    asset_valuation: AssetValuation,
+    transactions: list[Transaction],
+) -> None:
+    asset.ticker = "STALE"
+
+    with pytest.raises(exc.AssetWebError):
+        asset.update_valuations(through_today=True)
+
+    assert sql.count(AssetValuation.query()) == 1
+    assert asset_valuation.value == Decimal(2)
+
+
 def test_update_sectors_none(asset: Asset) -> None:
     asset.ticker = None
     with pytest.raises(exc.NoAssetWebSourceError):

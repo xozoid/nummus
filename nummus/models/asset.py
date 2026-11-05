@@ -521,7 +521,8 @@ class Asset(Base):
 
         Raises:
             NoAssetWebSourceError: If Asset has no ticker
-            AssetWebError: If failed to download data
+            AssetWebError: If data cannot be downloaded or does not overlap the
+                asset's transaction period
 
         """
         if self.ticker is None:
@@ -567,17 +568,23 @@ class Asset(Base):
             raise exc.AssetWebError(e) from e
 
         valuations: dict[int, float] = utils.pd_series_to_dict(raw["Close"])
+        valuation_updates: dict[object, dict[str, object]] = {
+            k: {"value": Decimal(v), "asset_id": self.id_}
+            for k, v in valuations.items()
+            if start_ord <= k <= end_ord
+        }
+        if not valuation_updates:
+            msg = f"{self.ticker}: No valuation data for {start} through {end}"
+            # NOTE: Do not let a stale or non-overlapping provider response clear
+            # historical valuations through update_rows().
+            raise exc.AssetWebError(ValueError(msg))
 
         query = AssetValuation.query().where(AssetValuation.asset_id == self.id_)
         update_rows(
             AssetValuation,
             query,
             "date_ord",
-            {
-                k: {"value": Decimal(v), "asset_id": self.id_}
-                for k, v in valuations.items()
-                if start_ord <= k <= end_ord
-            },
+            valuation_updates,
         )
 
         splits: dict[int, float] = utils.pd_series_to_dict(
