@@ -15,8 +15,9 @@ import prometheus_client
 import prometheus_flask_exporter
 import prometheus_flask_exporter.multiprocess
 
-from nummus import controllers, utils, web_assets
+from nummus import controllers
 from nummus import exceptions as exc
+from nummus import utils, web_assets
 from nummus.controllers import (
     accounts,
     allocation,

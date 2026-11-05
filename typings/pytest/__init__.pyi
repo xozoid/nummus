@@ -31,8 +31,9 @@ from _pytest.freeze_support import freeze_includes
 from _pytest.legacypath import TempdirFactory, Testdir
 from _pytest.logging import LogCaptureFixture
 from _pytest.main import Dir, Session
-from _pytest.mark import HIDDEN_PARAM, Mark, MarkDecorator, MarkGenerator, param
+from _pytest.mark import HIDDEN_PARAM, Mark
 from _pytest.mark import MARK_GEN as mark
+from _pytest.mark import MarkDecorator, MarkGenerator, param
 from _pytest.monkeypatch import MonkeyPatch
 from _pytest.nodes import Collector, Directory, File, Item
 from _pytest.outcomes import exit, fail, importorskip, skip, xfail
@@ -84,6 +85,7 @@ def approx[T](
     abs: T | None = None,
     nan_ok: bool = False,
 ) -> ApproxScalar: ...
+
 def approx[T](
     expected: T,
     rel: T | None = None,
