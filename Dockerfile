@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 ################################################################################
-FROM python:3.12-slim-bullseye AS app-build
+FROM python:3.12-slim-bookworm AS app-build
 LABEL maintainer="Bradley Davis <me@bradleydavis.tech>"
 
 WORKDIR /app
@@ -32,7 +32,7 @@ RUN pip3 install --no-cache-dir "build>=1.2.2" "setuptools-scm>=8" \
 CMD [ "bash" ]
 
 ################################################################################
-FROM python:3.12-slim-bullseye AS app
+FROM python:3.12-slim-bookworm AS app
 LABEL maintainer="Bradley Davis <me@bradleydavis.tech>"
 
 WORKDIR /app
