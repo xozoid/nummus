@@ -163,7 +163,7 @@ class QueryMixIn(SessionMixIn):
     ) -> orm.query.RowReturningQuery[tuple[T0, T1, T2, T3, T4, T5]]: ...
 
     @classmethod
-    def query[T](
+    def query[T](  # type: ignore[reportInconsistentOverload]
         cls,
         *columns: sql_roles.TypedColumnsClauseRole[object],
         **kwargs: T,

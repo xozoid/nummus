@@ -38,7 +38,7 @@ from nummus.models.transaction_category import TransactionCategory
 from nummus.version import __version__
 
 if TYPE_CHECKING:
-    from collections.abc import Iterator
+    from collections.abc import Generator
 
     from nummus.importers.base import TxnDict
     from nummus.models.base import NamePair
@@ -275,7 +275,7 @@ class Portfolio:
         return sql.get_engine(self._path_db, self._enc)
 
     @contextlib.contextmanager
-    def begin_session(self) -> Iterator[orm.Session]:
+    def begin_session(self) -> Generator[orm.Session]:
         """Get SQL Session to the database.
 
         Yields:

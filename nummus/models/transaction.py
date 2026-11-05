@@ -7,7 +7,7 @@ import operator
 import re
 import string
 from collections import defaultdict
-from typing import override, TYPE_CHECKING
+from typing import cast, override, TYPE_CHECKING
 
 import sqlalchemy
 from rapidfuzz import process
@@ -523,7 +523,11 @@ class Transaction(Base):
         )
 
         def set_match(matching_row: int | Row[tuple[int]]) -> int:
-            id_ = matching_row if isinstance(matching_row, int) else matching_row[0]
+            id_ = (
+                matching_row
+                if isinstance(matching_row, int)
+                else cast("int", matching_row[0])
+            )
             if set_property:
                 self.similar_txn_id = id_
             return id_
