@@ -753,7 +753,7 @@ def mwrr(values: list[Decimal], profit: list[Decimal]) -> Decimal | None:
     def xnpv(r: float, cfs: dict[int, float]) -> float:
         if r <= 0:
             return float("inf")
-        return sum((cf / r ** (i / float(DAYS_IN_YEAR)) for i, cf in cfs.items()))
+        return sum(cf / r ** (i / float(DAYS_IN_YEAR)) for i, cf in cfs.items())
 
     try:
         result = optimize.brentq(lambda r: xnpv(r, cash_flows), 0.0, 1e10)

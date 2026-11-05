@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import datetime
 from decimal import Decimal
-from typing import TYPE_CHECKING
+from typing import cast, TYPE_CHECKING
 
 import pytest
 
@@ -362,8 +362,8 @@ def test_table_results(
                     accounts,
                     categories,
                     {
-                        label_id: labels[label_id]
-                        for label_id, in LabelLink.query(LabelLink.label_id).where(
+                        cast("int", label_id): labels[cast("int", label_id)]
+                        for (label_id,) in LabelLink.query(LabelLink.label_id).where(
                             LabelLink.t_split_id == txn.splits[0].id_,
                         )
                     },

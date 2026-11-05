@@ -12,7 +12,7 @@ version.py
 
 # Node
 node_modules
-package*
+package*.tgz
 
 # Test artifacts
 .test

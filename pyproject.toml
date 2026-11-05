@@ -141,7 +141,7 @@ exclude_lines = [
 [tool.djlint]
 extension = "jinja"
 profile = "jinja"
-ignore = "H020"
+ignore = "H020,H021,H024,H043,T032"
 
 [tool.isort]
 profile = "black"
@@ -180,19 +180,27 @@ preview = true
 future-annotations = true
 
 ignore = [
-  "FIX002",  # Permit TODOs
-  "I001",    # mismatch between ruff and isort
-  "PLR0904", # Too many public methods
-  "PLR0911", # Too many return statements
-  "PLR0912", # Too many branches
-  "PLR0913", # Too many arguments
-  "PLR0914", # Too many local variables
-  "PLR0915", # Too many statements
-  "PLR0917", # Too many positional arguments
-  "CPY001",  # No copyright
-  "D104",    # Missing docstring in public package
-  "D203",    # No blank line before pydocs
-  "D213",    # Summary on not on second line
+  "FIX002",                 # Permit TODOs
+  "I001",                   # mismatch between ruff and isort
+  "PLR0904",                # Too many public methods
+  "PLR0911",                # Too many return statements
+  "PLR0912",                # Too many branches
+  "PLR0913",                # Too many arguments
+  "PLR0914",                # Too many local variables
+  "PLR0915",                # Too many statements
+  "PLR0917",                # Too many positional arguments
+  "CPY001",                 # No copyright
+  "D104",                   # Missing docstring in public package
+  "D203",                   # No blank line before pydocs
+  "D213",                   # Summary on not on second line
+  "D421",                   # Docstring starts with whitespace
+  "E501",                   # Line too long
+  "F811",                   # Redefined unused import
+  "ICN001",                 # Conventional import aliases
+  "PLW0717",                # Too broad exception clause
+  "pytest-fixture-autouse", # Pytest autouse fixture
+  "RUF105",                 # Ruff rule-specific noqa directives
+  "RUF201",                 # Blank line between decorator and function
 ]
 
 [tool.ruff.lint.per-file-ignores]

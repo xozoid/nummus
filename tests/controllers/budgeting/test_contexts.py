@@ -19,6 +19,7 @@ from nummus.models.transaction_category import (
 )
 
 if TYPE_CHECKING:
+
     import datetime
 
     from sqlalchemy import orm
